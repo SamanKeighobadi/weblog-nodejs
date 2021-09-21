@@ -7,6 +7,8 @@ const morgan = require('morgan');
 
 const Database = require('./config/db');
 const { Statics } = require('./utils/statics');
+
+const dashboardRoutes = require('./routes/dashboard');
 const indexRoute = require('./routes/index');
 
 //* Config
@@ -34,6 +36,7 @@ Statics(app)
 
 //? Routes
 app.use(indexRoute)
+app.use('/dashboard',dashboardRoutes)
 
 const PORT = 3000; 
 
