@@ -1,6 +1,7 @@
 const path = require('path');
 
 const express = require('express');
+const expressLayout = require('express-ejs-layouts');
 const dotEnv = require('dotenv');
 const morgan = require('morgan');
 
@@ -23,7 +24,9 @@ if(process.env.NODE_ENV === 'development'){
 app.use(express.urlencoded({extended:false}))
 
 //? View Engine
+app.use(expressLayout)
 app.set('view engine','ejs')
+app.set('layout','./layouts/mainLayout')
 app.set('views',"views")
 
 //? Staticst
@@ -32,6 +35,6 @@ Statics(app)
 //? Routes
 app.use(indexRoute)
 
-const PORT = process.env.PORT || 3000; 
+const PORT = 3000; 
 
 app.listen( PORT,() =>console.log(`Server run in ${process.env.NODE_ENV} mode port ${ PORT}`))

@@ -10,6 +10,12 @@ router.get("/",(req,res) => {
     })
 });
 
+router.get('/dash',(req,res) => {
+    res.render('dash',{
+        title:'dahsboard',
+        layout:'./layouts/dashLayout'
+    })
+})
 
 
 module.exports = router;
