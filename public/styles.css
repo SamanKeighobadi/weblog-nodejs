@@ -1,3 +1,12 @@
-h3{
-    color:red
+@font-face {
+  font-family: "Mitra";
+  src: url("./fonts/pixelboy-BMitra.eot") format("eot"),
+    url("./fonts/pixelboy-BMitra.ttf") format("ttf"),
+    url("./fonts/pixelboy-BMitra.woff") format("woff");
+  font-weight: normal;
+}
+
+body,
+html {
+  font-family: "Mitra" !important;
 }
