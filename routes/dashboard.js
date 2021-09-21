@@ -6,7 +6,6 @@ router.get("/login", (req, res) => {
   res.render("./Login/login", {
     title: "Login Page",
     path: "/login",
-   
   });
 });
 
