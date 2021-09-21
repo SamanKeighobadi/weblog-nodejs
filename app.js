@@ -4,11 +4,15 @@ const express = require('express');
 const dotEnv = require('dotenv');
 const morgan = require('morgan');
 
+const Database = require('./config/db');
 const { Statics } = require('./utils/statics');
 const indexRoute = require('./routes/index');
 
 //* Config
-dotEnv.config({path:'/config/config.env'})
+dotEnv.config()
+
+//* Connect to databse 
+Database()
 
 const app = express();
 
