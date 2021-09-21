@@ -1,8 +1,10 @@
 const path = require('path');
 
 const express = require('express');
-const { Statics } = require('./utils/statics');
 const dotEnv = require('dotenv');
+const morgan = require('morgan');
+
+const { Statics } = require('./utils/statics');
 const indexRoute = require('./routes/index');
 
 //* Config
@@ -11,6 +13,9 @@ dotEnv.config({path:'/config/config.env'})
 const app = express();
 
 //* 
+if(process.env.NODE_ENV === 'development'){
+    app.use(morgan('dev'))
+}
 app.use(express.urlencoded({extended:false}))
 
 //? View Engine
