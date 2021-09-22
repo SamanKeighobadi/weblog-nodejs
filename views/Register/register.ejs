@@ -1,11 +1,12 @@
 <div class="container">
   <div class="row">
-    <form action="" class="shadow-sm col-12 p-4">
+    <form action="/users/register" method="POST" class="shadow-sm col-12 p-4">
       <h1 class="h3 font-bold">ثبت نام</h1>
       <label for="email" class="my-3">ایمیل :</label>
       <input
         type="email"
         name="email"
+        id="email"
         placeholder="ایمیل"
         required
         autofocus
@@ -15,6 +16,7 @@
       <label for="fullname" class="my-3">نام و نام خانوادگی : </label>
       <input
         type="text"
+        id="fullname"
         class="form-control w-25"
         placeholder="نام و نام خانوادگی"
         name="fullname"
@@ -24,6 +26,7 @@
       <label for="password" class="my-3">گذرواژه : </label>
       <input
         type="text"
+        id="password"
         class="form-control w-25"
         placeholder="گذرواژه"
         name="password"
@@ -33,6 +36,7 @@
       <label for="confirm_password" class="my-3">تکرار گذرواژه: </label>
       <input
         type="text"
+        id="confirm_password"
         class="form-control w-25"
         name="confirm_password"
         placeholder="تکرار گذرواژه"
@@ -42,7 +46,9 @@
       <label for="checkbox" class="my-3">با قوانین موافقم</label>
       <input type="checkbox" name="checkbox" required />
 
-      <button class="btn btn-info btn-block w-25">تایید</button>
+      <a href="/users/login">حساب کاربری دارید؟</a>
+
+      <button class="btn btn-info btn-block w-25">ثبت نام</button>
     </form>
   </div>
 </div>

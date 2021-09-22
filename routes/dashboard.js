@@ -12,14 +12,7 @@ router.get('/',(req,res) => {
   })
 })
 
-// @desct Login page 
-// @route : GET /login
-router.get("/login", (req, res) => {
-  res.render("./Login/login", {
-    title: "Login Page",
-    path: "/login",
-  });
-});
+
 
 
 module.exports = router;

@@ -11,13 +11,6 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/register", (req, res) => {
-  res.render("./Register/register", {
-    title: "ثبت نام",
-    path: "/register",
-  });
-});
-
 
 
 
