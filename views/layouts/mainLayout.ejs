@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/bootstrap-rtl.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
+    <%if(path === '/login') {%> 
+      <link rel="stylesheet" href="/css/login.css">
+    <%} %> 
+    <%if(path === '/register') {%> 
+      <link rel="stylesheet" href="/css/register.css">
+    <%} %> 
     <title><%= title %></title>
   </head>
-  <body class="rtl">
+  <body class="rtl login register ">
     <%- body %>
     <script src="/js/jquery.slim.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
