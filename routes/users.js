@@ -2,6 +2,9 @@ const { Router } = require("express");
 
 const router = new Router();
 
+const registerValidation = require('../validation/registerValidation');
+const loginValidatoin = require('../validation/loginValidation');
+
 // @desct Login page
 // @route : GET /users/login
 router.get("/login", (req, res) => {
@@ -14,12 +17,18 @@ router.get("/login", (req, res) => {
 // @desct Login page handler
 // @route : POST /users/login
 router.post("/login", (req, res) => {
-  console.log(req.body)
-  res.redirect('/dashboard')
+  loginValidatoin.validate(req.body).then(result => {
+    console.log(result)
+    res.redirect('/dashboard')
+
+  }).catch(err => {
+    console.log(err)
+    res.send("Error")
+  })
 });
 
 //@desc Register page
-// @route POST /users/register
+// @route GET /users/register
 router.get("/register", (req, res) => {
   res.render("./Register/register", {
     title: "ثبت نام",
@@ -30,8 +39,13 @@ router.get("/register", (req, res) => {
 //@desc Register page
 // @route POST /users/register
 router.post("/register", (req, res) => {
-  console.log(req.body)
-  res.redirect('/users/login')
+  registerValidation.validate(req.body).then(result => {
+    console.log(result)
+    res.redirect('/users/login')
+  }).catch(err => {
+    console.log(err)
+    res.send("error baby")
+  })
 });
 
 
