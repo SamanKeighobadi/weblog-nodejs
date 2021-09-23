@@ -1,5 +1,11 @@
 const yup = require('yup');
 
+
+const loginValidation = yup.object().shape({
+    email:yup.string().email().required(),
+    password:yup.string().required().min(4).max(120).trim(),
+})
+
 const registerValidation = yup.object().shape({
     fullname:yup.string().required('').min(4).max(125).trim(),
     email:yup.string().email('').required(''),
@@ -8,4 +14,7 @@ const registerValidation = yup.object().shape({
 })
 
 
-module.exports = registerValidation
+module.exports = {
+    loginValidation,
+    registerValidation
+}

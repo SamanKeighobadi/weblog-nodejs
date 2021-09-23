@@ -2,8 +2,7 @@ const { Router } = require("express");
 
 const router = new Router();
 
-const registerValidation = require('../validation/registerValidation');
-const loginValidatoin = require('../validation/loginValidation');
+const {registerValidation,loginValidation} = require('../validation/usersValidation');
 
 // @desct Login page
 // @route : GET /users/login
@@ -17,14 +16,16 @@ router.get("/login", (req, res) => {
 // @desct Login page handler
 // @route : POST /users/login
 router.post("/login", (req, res) => {
-  loginValidatoin.validate(req.body).then(result => {
-    console.log(result)
-    res.redirect('/dashboard')
-
-  }).catch(err => {
-    console.log(err)
-    res.send("Error")
-  })
+  loginValidation
+    .validate(req.body)
+    .then((result) => {
+      console.log(result);
+      res.redirect("/dashboard");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send("Error");
+    });
 });
 
 //@desc Register page
@@ -39,15 +40,16 @@ router.get("/register", (req, res) => {
 //@desc Register page
 // @route POST /users/register
 router.post("/register", (req, res) => {
-  registerValidation.validate(req.body).then(result => {
-    console.log(result)
-    res.redirect('/users/login')
-  }).catch(err => {
-    console.log(err)
-    res.send("error baby")
-  })
+  registerValidation
+    .validate(req.body)
+    .then((result) => {
+      console.log(result);
+      res.redirect("/users/login");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send("error baby");
+    });
 });
-
-
 
 module.exports = router;
