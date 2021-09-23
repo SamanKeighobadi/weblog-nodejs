@@ -11,6 +11,13 @@ router.get("/login", (req, res) => {
   });
 });
 
+// @desct Login page handler
+// @route : POST /users/login
+router.post("/login", (req, res) => {
+  console.log(req.body)
+  res.redirect('/dashboard')
+});
+
 //@desc Register page
 // @route POST /users/register
 router.get("/register", (req, res) => {
@@ -19,5 +26,14 @@ router.get("/register", (req, res) => {
     path: "/register",
   });
 });
+
+//@desc Register page
+// @route POST /users/register
+router.post("/register", (req, res) => {
+  console.log(req.body)
+  res.redirect('/users/login')
+});
+
+
 
 module.exports = router;
