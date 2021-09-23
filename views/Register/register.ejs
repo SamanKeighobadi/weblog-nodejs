@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <form action="/users/register" method="POST" class="shadow-sm col-12 p-4">
+      <%- include('../includes/errors/messages.ejs') %> 
       <h1 class="h3 font-bold">ثبت نام</h1>
       <label for="email" class="my-3">ایمیل :</label>
       <input
@@ -8,7 +9,7 @@
         name="email"
         id="email"
         placeholder="ایمیل"
-        required
+        
         autofocus
         class="form-control w-25"
       />
@@ -20,7 +21,7 @@
         class="form-control w-25"
         placeholder="نام و نام خانوادگی"
         name="fullname"
-        required
+        
       />
 
       <label for="password" class="my-3">گذرواژه : </label>
@@ -30,7 +31,7 @@
         class="form-control w-25"
         placeholder="گذرواژه"
         name="password"
-        required
+        
       />
 
       <label for="confirm_password" class="my-3">تکرار گذرواژه: </label>
@@ -40,11 +41,11 @@
         class="form-control w-25"
         name="confirm_password"
         placeholder="تکرار گذرواژه"
-        required
+        
       />
 
       <label for="checkbox" class="my-3">با قوانین موافقم</label>
-      <input type="checkbox" name="checkbox" required />
+      <input type="checkbox" name="checkbox"  />
 
       <a href="/users/login">حساب کاربری دارید؟</a>
 
