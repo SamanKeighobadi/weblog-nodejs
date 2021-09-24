@@ -11,7 +11,7 @@ const {
 // @route : GET /users/login
 router.get("/login", (req, res) => {
   res.render("./Login/login", {
-    title: "Login Page",
+    title: "ورود",
     path: "/login",
   });
 });
