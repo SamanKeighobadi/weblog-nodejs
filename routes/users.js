@@ -1,5 +1,7 @@
 const { Router } = require("express");
 
+const User = require("../models/User");
+
 const router = new Router();
 
 const {
@@ -15,8 +17,6 @@ router.get("/login", (req, res) => {
     path: "/login",
   });
 });
-
-
 
 //@desc Register page
 // @route GET /users/register
@@ -48,21 +48,26 @@ router.post("/login", (req, res) => {
 
 //@desc Register page
 // @route POST /users/register
-router.post("/register", (req, res) => {
-  registerValidation
-    .validate(req.body)
-    .then((result) => {
-      console.log(result);
-      res.redirect("/users/login");
-    })
-    .catch((err) => {
-      console.log(err.errors);
-      res.render("./Register/register", {
-        title: "ثبت نام",
-        path: "/register",
-        errors: err.errors,
+router.post("/register", async (req, res) => {
+  try {
+    await User.userValidation(req.body);
+    // await User.create(req.body)
+    res.redirect("/users/login");
+  } catch (err) {
+    console.log(err);
+    const errors = [];
+    err.inner.forEach((error) => {
+      errors.push({
+        name: error.path,
+        message: error.message,
       });
     });
+    return res.render("./Register/register", {
+      title: "ثبت نام کاربر",
+      path: "register",
+      errors,
+    });
+  }
 });
 
 module.exports = router;
