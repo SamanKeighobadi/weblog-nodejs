@@ -4,19 +4,15 @@ const User = require("../models/User");
 
 const router = new Router();
 
+const userContollers = require('../controllers/userController');
+
 const {
-  registerValidation,
   loginValidation,
 } = require("../validation/usersValidation");
 
 // @desct Login page
 // @route : GET /users/login
-router.get("/login", (req, res) => {
-  res.render("./Login/login", {
-    title: "ورود",
-    path: "/login",
-  });
-});
+router.get("/login", userContollers.login);
 
 //@desc Register page
 // @route GET /users/register
@@ -64,7 +60,7 @@ router.post("/register", async (req, res) => {
     });
     return res.render("./Register/register", {
       title: "ثبت نام کاربر",
-      path: "register",
+      path: "/register",
       errors,
     });
   }
