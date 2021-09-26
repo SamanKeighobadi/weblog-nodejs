@@ -4,11 +4,9 @@ const User = require("../models/User");
 
 const router = new Router();
 
-const userContollers = require('../controllers/userController');
+const userContollers = require("../controllers/userController");
 
-const {
-  loginValidation,
-} = require("../validation/usersValidation");
+const { loginValidation } = require("../validation/usersValidation");
 
 // @desct Login page
 // @route : GET /users/login
@@ -16,54 +14,14 @@ router.get("/login", userContollers.login);
 
 //@desc Register page
 // @route GET /users/register
-router.get("/register", (req, res) => {
-  res.render("./Register/register", {
-    title: "ثبت نام",
-    path: "/register",
-  });
-});
+router.get("/register", userContollers.register);
 
 // @desct Login page handler
 // @route : POST /users/login
-router.post("/login", (req, res) => {
-  loginValidation
-    .validate(req.body)
-    .then((result) => {
-      console.log(result);
-      res.redirect("/dashboard");
-    })
-    .catch((err) => {
-      console.log(err.errors);
-      res.render("./Login/login", {
-        title: "ورود",
-        path: "/login",
-        errors: err.errors,
-      });
-    });
-});
+router.post("/login", userContollers.loginUser);
 
 //@desc Register page
 // @route POST /users/register
-router.post("/register", async (req, res) => {
-  try {
-    await User.userValidation(req.body);
-    // await User.create(req.body)
-    res.redirect("/users/login");
-  } catch (err) {
-    console.log(err);
-    const errors = [];
-    err.inner.forEach((error) => {
-      errors.push({
-        name: error.path,
-        message: error.message,
-      });
-    });
-    return res.render("./Register/register", {
-      title: "ثبت نام کاربر",
-      path: "/register",
-      errors,
-    });
-  }
-});
+router.post("/register", userContollers.CreateUser);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const mongoose= require('mongoose');
-const {registerValidation} = require('../validation/usersValidation');
+const {registerValidation, loginValidation} = require('../validation/usersValidation');
 
 const userSchema = new mongoose.Schema({
     fullname:{
@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.userValidation = function(body) {
     return registerValidation.validate(body,{abortEarly:false})
 }
+userSchema.statics.loginValidation = function(body){
+    return loginValidation.validate(body,{abortEarly:false})
+} 
 
 const User= mongoose.model('User',userSchema)
 
