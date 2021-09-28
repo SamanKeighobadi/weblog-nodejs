@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
 exports.login = (req, res) => {
   res.render("./Login/login", {
@@ -22,6 +23,7 @@ exports.CreateUser = async (req, res) => {
   const errors = [];
 
   try {
+    // check if user already exist
     await User.userValidation(req.body);
     const { fullname, email, password } = req.body;
     const user = await User.findOne({ email });
@@ -35,7 +37,9 @@ exports.CreateUser = async (req, res) => {
       });
     }
 
-    await User.create(req.body);
+    // Hashing password
+    const hash = await bcrypt.hash(password, 10);
+    await User.create({ fullname, email, password: hash });
     res.redirect("/users/login");
   } catch (err) {
     console.log(err);
@@ -54,12 +58,13 @@ exports.CreateUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
+  const errors = [];
+
   try {
     await User.loginValidation(req.body);
     res.redirect("/dashboard");
   } catch (err) {
     console.log(err);
-    const errors = [];
     err.inner.forEach((error) => {
       errors.push({
         name: error.path,
