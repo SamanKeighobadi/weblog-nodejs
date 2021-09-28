@@ -2,6 +2,7 @@
   <div class="w-100 shadow-lg rounded row bg-light">
     <div class="col-12">
       <form action="/users/login" method="POST" class="login-form">
+        <%- include('../includes/loginMessages.ejs') %> 
         <%- include('../includes/errors/messages.ejs') %>
         <h1 class="h3 mb-3 font-weight-bold pt-3">لطفا وارد شوید:</h1>
         <label for="fullname" class="py-3 font-weight-bold">ایمیل :</label>

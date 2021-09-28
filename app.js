@@ -2,6 +2,8 @@ const express = require("express");
 const expressLayout = require("express-ejs-layouts");
 const dotEnv = require("dotenv");
 const morgan = require("morgan");
+const flash = require('connect-flash');
+const session = require('express-session');
 
 const Database = require("./config/db");
 const { Statics } = require("./utils/statics");
@@ -22,7 +24,18 @@ const app = express();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
 app.use(express.urlencoded({ extended: false }));
+// * Session
+app.use(session({
+  secret:'secret',
+  cookie:{maxAge:6000},
+  resave:false,
+  saveUninitialized:false,
+}))
+
+//? Flahs
+app.use(flash())
 
 //? View Engine
 app.use(expressLayout);

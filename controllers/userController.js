@@ -5,6 +5,7 @@ exports.login = (req, res) => {
   res.render("./Login/login", {
     title: "ورود",
     path: "/login",
+    message:req.flash('success_msg')
   });
 };
 
@@ -40,6 +41,7 @@ exports.CreateUser = async (req, res) => {
     // Hashing password
     const hash = await bcrypt.hash(password, 10);
     await User.create({ fullname, email, password: hash });
+    req.flash('success_msg',"ثبت نام با موفقیت انجام شد !")
     res.redirect("/users/login");
   } catch (err) {
     console.log(err);
