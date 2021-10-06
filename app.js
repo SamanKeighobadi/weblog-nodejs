@@ -1,9 +1,11 @@
+
 const express = require("express");
 const expressLayout = require("express-ejs-layouts");
+const passport = require("passport");
 const dotEnv = require("dotenv");
 const morgan = require("morgan");
-const flash = require('connect-flash');
-const session = require('express-session');
+const flash = require("connect-flash");
+const session = require("express-session");
 
 const Database = require("./config/db");
 const { Statics } = require("./utils/statics");
@@ -12,30 +14,39 @@ const userRoutes = require("./routes/users");
 const dashboardRoutes = require("./routes/dashboard");
 const indexRoute = require("./routes/index");
 
-//* Config
+//? Config
 dotEnv.config();
 
-//* Connect to databse
+//? passport configuration
+require("./config/auth");
+
+//? Connect to databse
 Database();
 
 const app = express();
 
-//*
+//?
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
 app.use(express.urlencoded({ extended: false }));
-// * Session
-app.use(session({
-  secret:'secret',
-  cookie:{maxAge:6000},
-  resave:false,
-  saveUninitialized:false,
-}))
+//? Session
+app.use(
+  session({
+    secret: "secret",
+    cookie: { maxAge: 6000 },
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+//? Passport.js initalize
+app.use(passport.initialize());
+app.use(passport.session());
 
 //? Flahs
-app.use(flash())
+app.use(flash());
 
 //? View Engine
 app.use(expressLayout);

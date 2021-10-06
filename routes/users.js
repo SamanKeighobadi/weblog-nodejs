@@ -12,6 +12,10 @@ const { loginValidation } = require("../validation/usersValidation");
 // @route : GET /users/login
 router.get("/login", userContollers.login);
 
+// @desct Login Handler
+// @route : POST /users/login
+router.post("/login", userContollers.handleLogin);
+
 //@desc Register page
 // @route GET /users/register
 router.get("/register", userContollers.register);
@@ -20,8 +24,9 @@ router.get("/register", userContollers.register);
 // @route : POST /users/login
 router.post("/login", userContollers.loginUser);
 
+
 //@desc Register page
 // @route POST /users/register
 router.post("/register", userContollers.CreateUser);
-
+ 
 module.exports = router;

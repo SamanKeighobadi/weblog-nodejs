@@ -4,13 +4,14 @@ const { Strategy } = require("passport-local");
 const bcrypt = require("bcryptjs");
 
 passport.use(
-  new Strategy({ usernameField: email }, async (email, password, done) => {
+  new Strategy({ usernameField: "email" }, async (email, password, done) => {
     try {
       const user = User.findOne({ email });
+
       if (!user) {
         return done(null, false, { message: "کاربری با این ایمیل موجود نیست" });
       }
-
+      console.log(password)
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         return done(null, user);
